@@ -13,5 +13,4 @@ def get_arguments() -> argparse.Namespace:
     parser.add_argument('-n', '--num', type=int, help='how many images do you want to download')
 
     args = parser.parse_args()
-
     return args

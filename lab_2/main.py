@@ -4,8 +4,8 @@ from images import download_images
 from parser import get_arguments
 
 def main():
-    args = get_arguments()
     try:
+        args = get_arguments()
         download_images(args.keyword, args.num, args.dir)
         create_annotation(args.dir, args.file)
         img = ImageIterator(args.file)
