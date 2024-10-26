@@ -14,5 +14,5 @@ def create_annotation(dir_path: str, filename:str) -> None:
 
         for item in os.listdir(dir_path):
             absolute_path = os.path.abspath(os.path.join(dir_path, item))
-            relative_path = os.path.relpath(item, start=dir_path)
+            relative_path = os.path.relpath(os.path.join(dir_path, item))
             writer.writerow([relative_path, absolute_path])

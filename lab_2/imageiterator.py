@@ -5,16 +5,11 @@ class ImageIterator:
         self.file = filename
         self.images = list()
         self.index = 0
+        self.images = self._open_csv()
         self.limit = len(self.images)
-        with open(self.file, newline='') as my_file:
-            reader = csv.reader(my_file)
-            next(reader)
-            self.images.append(reader)
-
 
     def __iter__(self):
         return self
-
 
     def __next__(self):
         if self.index < self.limit:
@@ -23,3 +18,9 @@ class ImageIterator:
             return next_image
         else:
             raise StopIteration
+
+    def _open_csv(self) -> list:
+        with open(self.file, 'r') as my_file:
+            reader = csv.reader(my_file)
+            next(reader)
+            return [item[1] for item in reader]
