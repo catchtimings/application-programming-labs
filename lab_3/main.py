@@ -1,6 +1,6 @@
-from parser import get_arguments
-from image import *
 from historgam import *
+from image import *
+from parser import get_arguments
 
 
 def main():

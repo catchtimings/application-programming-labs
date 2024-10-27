@@ -1,6 +1,6 @@
 import cv2
-from os.path import exists
 from numpy import ndarray
+from os.path import exists
 
 
 def read_image(image_name:str) -> ndarray:
