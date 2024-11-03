@@ -3,8 +3,9 @@ from dataframe import *
 FILENAME = 'annotation.csv'
 
 def main():
-    adf = create_dataframe(FILENAME)
-    print(adf[:5])
+    df = create_dataframe(FILENAME)
+    df2 = add_columns_with_size(df)
+    df2.to_csv('an.csv')
 
 if __name__ == '__main__':
     main()
