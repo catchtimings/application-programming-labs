@@ -1,5 +1,3 @@
-from adodbapi.examples.xls_read import filename
-
 from dataframe import *
 from parser import get_arguments
 
@@ -8,8 +6,8 @@ MAX_WIDTH = 700
 
 
 def main():
+    filename = get_arguments()
     try:
-        filename = get_arguments()
         df = create_dataframe(filename)
         df.to_csv('df.csv')
 
