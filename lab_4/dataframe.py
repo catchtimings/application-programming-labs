@@ -1,7 +1,6 @@
 import cv2
 import pandas as pd
 
-
 def create_dataframe(filename:str) -> pd.DataFrame:
     """
     The func creates dataframe of annotation
@@ -14,7 +13,7 @@ def create_dataframe(filename:str) -> pd.DataFrame:
 
 def add_columns_with_size(df: pd.DataFrame) -> pd.DataFrame:
     """
-    The func adds 3 columns with image height, width and channels
+    The func calculates and adds image size
     :param df: dataframe
     :return: dataframe with new columns
     """
@@ -22,6 +21,7 @@ def add_columns_with_size(df: pd.DataFrame) -> pd.DataFrame:
     width = list()
     channels = list()
 
+    df = df.copy()
     for item in df['Absolute path']:
         img = cv2.imread(item)
         h, w, c = img.shape
