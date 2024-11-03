@@ -33,3 +33,12 @@ def add_columns_with_size(df: pd.DataFrame) -> pd.DataFrame:
     df['Width'] = width
     df['Channels'] = channels
     return df
+
+
+def sort_dataframe(df: pd.DataFrame, max_height: int, max_width:int) -> pd.DataFrame:
+    suitable = list()
+    for i in range(len(df)):
+        if (df.at[i, 'Height'] <= max_height) and (df.at[i, 'Width'] <= max_width):
+            suitable.append(df.iloc[i])
+    sorted_dataframe = pd.DataFrame(suitable)
+    return sorted_dataframe
