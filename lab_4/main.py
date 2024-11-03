@@ -6,8 +6,8 @@ MAX_WIDTH = 700
 
 
 def main():
-    filename = get_arguments()
     try:
+        filename = get_arguments()
         df = create_dataframe(filename)
         df.to_csv('df.csv')
 
