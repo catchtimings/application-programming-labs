@@ -38,17 +38,13 @@ def add_columns_with_size(df: pd.DataFrame) -> pd.DataFrame:
 
 def sort_dataframe(df: pd.DataFrame, max_height: int, max_width:int) -> pd.DataFrame:
     """
-    The func creates new dataframe and adds in it sorted rows that suit by max values
+    The func creates new dataframe and adds sorted rows that suit by max values in it
     :param df: dataframe
     :param max_height: max height value
     :param max_width: max width value
     :return: new sorted dataframe
     """
-    lst = list()
-    for i in range(len(df)):
-        if (df.at[i, 'Height'] <= max_height) and (df.at[i, 'Width'] <= max_width):
-            lst.append(df.iloc[i])
-    sorted_dataframe = pd.DataFrame(lst)
+    sorted_dataframe = df[(df['Height'] <= max_height) & (df['Width'] <= max_width)]
     return sorted_dataframe
 
 
