@@ -42,3 +42,11 @@ def sort_dataframe(df: pd.DataFrame, max_height: int, max_width:int) -> pd.DataF
             suitable.append(df.iloc[i])
     sorted_dataframe = pd.DataFrame(suitable)
     return sorted_dataframe
+
+
+def add_square_column(df:pd.DataFrame) -> pd.DataFrame:
+    square = list()
+    for i in range(len(df)):
+        square.append(df.at[i, 'Height'] * df.at[i, 'Width'])
+    df['Square of Height and Width'] = square
+    return df
