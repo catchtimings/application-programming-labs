@@ -9,6 +9,7 @@ def create_dataframe(filename:str) -> pd.DataFrame:
     :return: DataFrame of annotation
     """
     df = pd.read_csv(filename)
+    df.columns = ['Relative_path', 'Absolute_path']
     return df
 
 
@@ -22,8 +23,7 @@ def add_columns_with_size(df: pd.DataFrame) -> pd.DataFrame:
     width = list()
     channels = list()
 
-    df = df.copy()
-    for item in df['Absolute path']:
+    for item in df['Absolute_path']:
         img = cv2.imread(item)
         h, w, c = img.shape
         height.append(h)
