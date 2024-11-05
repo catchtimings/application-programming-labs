@@ -68,6 +68,9 @@ def sort_by_square(df:pd.DataFrame) -> pd.DataFrame:
     sorted_dataframe = sorted_dataframe.sort_values(by='Square')
     return sorted_dataframe
 
+def info(df:pd.DataFrame) -> None:
+    print(df[['Height', 'Width', 'Channels']].describe())
+
 
 def create_hist(df:pd.DataFrame) -> None:
     """
