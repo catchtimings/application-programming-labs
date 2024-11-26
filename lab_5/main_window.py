@@ -70,36 +70,58 @@ class Ui_MainWindow(object):
             file, _ = QFileDialog.getOpenFileName(
                 parent=QtWidgets.QApplication.activeWindow(),
                 caption="Select Annotation CSV File",
-                directory="",
+                directory="C:/Users/ct/Desktop",
                 filter="CSV Files (*.csv)"
             )
             if file:
                 self.csv_file = file
                 if not QtCore.QFile.exists(file):
-                    raise FileNotFoundError(f"File '{file}' not found.")
+                    self.show_message_critical("File not found")
                 self.iterator = ImageIterator(self.csv_file)
+                self.next_image()
             else:
-                QMessageBox.warning(self, "Warning", "Please select a valid CSV file")
+                self.show_message_critical("Please select a valid CSV file")
         except Exception:
-            QMessageBox.critical(self, "Error", f"An error occurred while opening the file: {str(e)}")
-            raise
+            self.show_message_critical("An error occurred while opening the file")
 
     def next_image(self):
         """
         Display next image in main window
         """
         if not self.iterator:
-            QMessageBox.warning(self, "Warning", "Please load a CSV file first")
+            self.show_message_critical("Please load a CSV file first")
             return
         try:
             image_dir = next(self.iterator)
             pixmap = QPixmap(image_dir)
-            self.image.setPixmap(pixmap)
+            if pixmap.isNull():
+                self.show_message_warning("Image not found")
+            else:
+                self.image.setPixmap(pixmap)
         except StopIteration:
-            QMessageBox.information(self, "End", "You've reached the end of the images")
-        except Exception as e:
-            QMessageBox.critical(self, "Error", f"Error loading image: {str(e)}")
-            raise
+            self.show_message_warning("You've reached the end of the images. No more images to display.")
+        except Exception:
+            self.show_message_critical("Something went wrong...")
+
+    def show_message_warning(self, text: str):
+        """
+        Warning window
+        """
+        msg = QMessageBox()
+        msg.setWindowTitle("Warning")
+        msg.setText(text)
+        msg.setIcon(QMessageBox.Warning)
+        msg.exec()
+
+    def show_message_critical(self, text: str):
+        """
+        Critical window
+        """
+        msg = QMessageBox()
+        msg.setWindowTitle("Error")
+        msg.setText(text)
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec()
 
 
 if __name__ == "__main__":
